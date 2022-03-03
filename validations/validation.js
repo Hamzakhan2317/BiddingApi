@@ -8,7 +8,7 @@ const registerValidation = data => {
       minDomainSegments: 2,
       tlds: { allow: ["com", "net"] },
     }),
-    phonNo:Joi.string().required()
+    phoneNo:Joi.string().required()
   });
 
   const validate=schema.validate(data);
