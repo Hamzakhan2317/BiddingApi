@@ -24,5 +24,4 @@ app.use("/api/user",authRoute);
 app.use("/api/product",productRoute);
 
 
-
-app.listen(3000 , ()=>{ console.log("server Started") })
+app.listen(process.env.PORT  || 3000 , ()=>{ console.log("server Started") })
