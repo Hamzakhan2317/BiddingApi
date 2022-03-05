@@ -5,7 +5,6 @@ const User = require("../models/userModel");
 const {registerValidation,loginValidation} = require('../validations/validation');
 const { errorResponse, successResponse } = require('../common/response');
 const { messages } = require('../common/messages');
-const user = require("../models/userModel");
 
 router.post("/register", async (req, res) => {
 

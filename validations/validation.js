@@ -26,6 +26,7 @@ const loginValidation = data => {
 
   return schema.validate(data);
 };
+
 const productValidation = data =>{
   const schema = Joi.object({
     userId: Joi.string(),
@@ -33,7 +34,6 @@ const productValidation = data =>{
     productTitle: Joi.string(),
     productDescription: Joi.string(),
     productPrice: Joi.number(),
-    productId: Joi.string(),
     approval: Joi.bool(),
   });
   return schema.validate(data);

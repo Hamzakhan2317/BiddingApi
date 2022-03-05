@@ -24,12 +24,10 @@ const productSchema =mongoose.Schema({
           type:Number,
           require:true
      },
-     productId:{
-          type:String,
-     },
      approval:{
           type:Boolean,
      }
 });
 
-module.exports = mongoose.model("product" , productSchema)
+const Products = mongoose.model("product" , productSchema)
+module.exports = Products;
