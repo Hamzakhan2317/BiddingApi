@@ -55,4 +55,15 @@ router.post("/login", async(req,res)=>{
   }
 
 });
+
+router.post("/deleteUser", async (req, res) => {
+  var Userslist = await User.findByIdAndDelete({_id:req.body._id})
+    .then((result) => {
+      res.status(200).send(successResponse("User removed Successfully!"))
+    })
+    .catch((error) => {
+      res.status(400).send(errorResponse(error));
+    });
+});
+
 module.exports = router;
