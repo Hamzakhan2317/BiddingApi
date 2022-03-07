@@ -26,10 +26,10 @@ const loginValidation = data => {
 
   return schema.validate(data);
 };
-
 const productValidation = data =>{
   const schema = Joi.object({
     userId: Joi.string(),
+    categoryType:Joi.string(),
     productName: Joi.string(),
     productTitle: Joi.string(),
     productDescription: Joi.string(),

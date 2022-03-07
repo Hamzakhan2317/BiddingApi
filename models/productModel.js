@@ -5,6 +5,11 @@ const productSchema =mongoose.Schema({
           type:String,
           require:true,
      },
+     categoryType:{
+          type:String,
+          max:50,
+          require:true
+     },
      productName:{
           type:String,
           max:50,
