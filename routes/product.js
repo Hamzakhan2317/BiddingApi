@@ -1,6 +1,4 @@
 const router = require("express").Router();
-const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv");
 const Products = require("../models/productModel");
 const User = require("../models/userModel");
 const Category = require("../models/categoriesModel");
@@ -61,6 +59,16 @@ router.post("/addProduct", async (req, res) => {
 
 router.get("/getAllProducts", async (req, res) => {
   var Productslist = await Products.find()
+    .then((result) => {
+      res.send(successResponse(result));
+    })
+    .catch((error) => {
+      res.send(errorResponse(error));
+    });
+});
+
+router.get("/ProductsByType", async (req, res) => {
+  var Categorylist = await Products.find({categoryType:req.params.type})
     .then((result) => {
       res.send(successResponse(result));
     })

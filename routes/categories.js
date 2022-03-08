@@ -16,4 +16,6 @@ router.get("/getCategories", async (req, res) => {
     });
 });
 
+
+
 module.exports =router
