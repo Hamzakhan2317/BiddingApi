@@ -67,7 +67,7 @@ router.get("/getAllProducts", async (req, res) => {
     });
 });
 
-router.get("/ProductsByType", async (req, res) => {
+router.get("/getAllProductsByType", async (req, res) => {
   var Categorylist = await Products.find({categoryType:req.params.type})
     .then((result) => {
       res.send(successResponse(result));
