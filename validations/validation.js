@@ -18,6 +18,7 @@ const loginValidation = data => {
   
   const schema = Joi.object({
     password: Joi.string(),
+    edu: Joi.boolean(),
     email: Joi.string().email({
       minDomainSegments: 2,
       tlds: { allow: ["com", "net"] },
@@ -38,5 +39,13 @@ const productValidation = data =>{
   });
   return schema.validate(data);
 }
+const accountValidation = data =>{
+  const schema = Joi.object({
+    userId: Joi.string(),
+    balance:Joi.number(),
+    name: Joi.string(),
+  });
+  return schema.validate(data);
+}
 
-module.exports = {registerValidation,loginValidation,productValidation}
+module.exports = { registerValidation, loginValidation, productValidation, accountValidation }

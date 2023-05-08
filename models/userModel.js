@@ -31,6 +31,10 @@ const userSchema=mongoose.Schema({
           max:255,
           min:5
      },
+     edu:{
+          type:Boolean,
+          require:false,
+     },
      date:{
           type:Date,
           default:Date.now

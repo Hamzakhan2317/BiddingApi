@@ -1,10 +1,12 @@
 const router = require("express").Router();
 const Products = require("../models/productModel");
 const User = require("../models/userModel");
+const Transfer = require("../models/transferModel");
 const Category = require("../models/categoriesModel");
 const { productValidation } = require("../validations/validation");
 const { errorResponse, successResponse } = require("../common/response");
 const { messages } = require("../common/messages");
+
 
 router.post("/addProduct", async (req, res) => {
   var { error } = productValidation(req.body);
@@ -19,10 +21,10 @@ router.post("/addProduct", async (req, res) => {
       req.body.categoryType == ctgry[0].category[2]
     ) {
       try {
-      var validUser = await User.findById({ _id: req.body.userId });
-        
+        var validUser = await User.findById({ _id: req.body.userId });
+
       } catch (error) {
-        
+
       }
 
       if (!validUser)
@@ -59,6 +61,7 @@ router.post("/addProduct", async (req, res) => {
 
 router.get("/getAllProducts", async (req, res) => {
   var Productslist = await Products.find()
+  // var getTranfers = await Transfer.find()
     .then((result) => {
       res.send(successResponse(result));
     })
@@ -68,7 +71,7 @@ router.get("/getAllProducts", async (req, res) => {
 });
 
 router.get("/getAllProductsByType", async (req, res) => {
-  var Categorylist = await Products.find({categoryType:req.params.type})
+  var Categorylist = await Products.find({ categoryType: req.params.type })
     .then((result) => {
       res.send(successResponse(result));
     })
