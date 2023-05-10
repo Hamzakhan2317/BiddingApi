@@ -11,6 +11,7 @@ const authRoute = require("./routes/auth");
 const productRoute = require("./routes/product");
 const categoriesRoute = require("./routes/categories");
 const accountRoute = require("./routes/account");
+const transactionRoute = require("./routes/transcation");
 
 //Middlewares
 app.use(express.json());
@@ -27,6 +28,7 @@ app.use("/api/user", authRoute);
 app.use("/api/product", productRoute);
 app.use("/api/categories", categoriesRoute);
 app.use("/api/accounts", accountRoute);
+app.use("/api/transactions", transactionRoute);
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("server Started");

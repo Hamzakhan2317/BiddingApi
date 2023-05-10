@@ -28,7 +28,14 @@ router.post("/account", async (req, res) => {
             });
             try {
                 const savedAccounts = await addAccountSchema.save();
-                res.status(200).send(successResponse(savedAccounts));
+                Account.find()
+                    .then((result) => {
+                        res.send(successResponse(result));
+                    })
+                    .catch((error) => {
+                        res.send(errorResponse(error));
+                    });
+                // res.status(200).send(successResponse(datas));
             } catch (error) {
                 res.status(400).send(errorResponse(error));
             }

@@ -47,5 +47,16 @@ const accountValidation = data =>{
   });
   return schema.validate(data);
 }
+const transactionValidation = data =>{
+  const schema = Joi.object({
+    userId: Joi.string(),
+    desc:Joi.string(),
+    accountId: Joi.string(),
+    category: Joi.string(),
+    transcationType: Joi.string(),
+    amount: Joi.number(),
+  });
+  return schema.validate(data);
+}
 
-module.exports = { registerValidation, loginValidation, productValidation, accountValidation }
+module.exports = { registerValidation, loginValidation, productValidation, transactionValidation, accountValidation }

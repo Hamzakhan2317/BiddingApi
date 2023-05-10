@@ -6,7 +6,6 @@ const accountSchema = mongoose.Schema({
         type: String,
         max: 255,
         require: true,
-        unique: true
     },
     balance: {
         type: Number,

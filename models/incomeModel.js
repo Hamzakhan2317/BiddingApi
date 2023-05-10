@@ -2,11 +2,29 @@ const mongoose = require('mongoose');
 
 //Income Schema
 const incomeSchema = mongoose.Schema({
-    name: {
+    desc: {
         type: String,
-        max: 255,
         require: true,
-        unique: true
+    },
+    category: {
+        type: String,
+        require: true,
+    },
+    amount: {
+        type: Number,
+        require: true,
+    },
+    transcationType: {
+        type: String,
+        require: true,
+    },
+    accountId: {
+        type: String,
+        require: true,
+    },
+    userId: {
+        type: String,
+        require: true,
     },
     date: {
         type: Date,
