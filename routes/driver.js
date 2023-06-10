@@ -5,37 +5,30 @@ const Account = require("../models/accountModel");
 const Expense = require("../models/expenseModel");
 const Income = require("../models/incomeModel");
 const Transfer = require("../models/transferModel");
-const { accountValidation } = require("../validations/validation");
+const { driverValidation } = require("../validations/validation");
 const { errorResponse, successResponse } = require("../common/response");
 const { messages } = require("../common/messages");
+const Driver = require("../models/driverModal");
 
 //add
-router.post("/account", async (req, res) => {
-    var { error } = accountValidation(req.body);
+router.post("/driver", async (req, res) => {
+    var { error } = driverValidation(req.body);
 
     //res.status(400).send(errorResponse("User not found!"));
 
     if (!error) {
-        var accnt = await Account.find();
-        let acctFound = accnt?.find(({ name, userId }) => name === req.body.name && userId === req.body.userId)
         let userFound = User.findById({ _id: req.body.userId })
 
-        if (!acctFound && userFound) {
-            const addAccountSchema = new Account({
+        if (userFound) {
+            const addDriverSchema = new Driver({
                 userId: req.body.userId,
-                name: req.body.name,
-                balance: 0,
+                noOfSeats: req.body.noOfSeats,
+                vehicleType: req.body.vehicleType,
+                departureLocation: req.body.departureLocation,
             });
             try {
-                const savedAccounts = await addAccountSchema.save();
-                Account.find()
-                    .then((result) => {
-                        res.send(successResponse(result));
-                    })
-                    .catch((error) => {
-                        res.send(errorResponse(error));
-                    });
-                // res.status(200).send(successResponse(datas));
+                const savedDriver = await addDriverSchema.save();
+                res.status(200).send(successResponse({ status: "Driver added Successfully!" }));
             } catch (error) {
                 res.status(400).send(errorResponse(error));
             }
@@ -54,11 +47,8 @@ router.post("/account", async (req, res) => {
 });
 
 //get
-router.get("/account", async (req, res) => {
-    await Expense.find();
-    await Income.find();
-    await Transfer.find();
-    var Accountslist = await Account.find()
+router.get("/driver", async (req, res) => {
+    await Driver.find()
         .then((result) => {
             res.send(successResponse(result));
         })
@@ -67,9 +57,10 @@ router.get("/account", async (req, res) => {
         });
 });
 
-//getbyId
-router.get("/account", async (req, res) => {
-    var Categorylist = await Products.find({ _id: req.params.id })
+// getbyId
+router.post("/driverById", async (req, res) => {
+    console.log('first',req.params)
+    await Driver.findById({ _id: req.body.id })
         .then((result) => {
             res.send(successResponse(result));
         })
@@ -79,14 +70,14 @@ router.get("/account", async (req, res) => {
 });
 
 //Delete 
-router.delete("/account", async (req, res) => {
-    var Productslist = await Products.findByIdAndDelete({ _id: req.body.userId })
-        .then((result) => {
-            res.status(200).send(successResponse("Product removed Successfully!"));
-        })
-        .catch((error) => {
-            res.status(400).send(errorResponse(error));
-        });
-});
+// router.delete("/account", async (req, res) => {
+//     var Productslist = await Products.findByIdAndDelete({ _id: req.body.userId })
+//         .then((result) => {
+//             res.status(200).send(successResponse("Product removed Successfully!"));
+//         })
+//         .catch((error) => {
+//             res.status(400).send(errorResponse(error));
+//         });
+// });
 
 module.exports = router;

@@ -46,7 +46,8 @@ router.post("/login", async (req, res) => {
       let verifyEmail = req.body.email?.split('@')[1]
       let ch = verifyEmail?.includes('ucp.edu.pk')
       if (ch) {
-        const emailExists = await User.findOne({ email: req.body.email });
+        const emailExists = await User.findOne({ email: req.body.email, password: req.body.password });
+        console.log('first',emailExists)
         if (!emailExists) return res.status(400).send(errorResponse(messages.loginFailedMessage))
         //check for password
         const validPassword = await User.findOne({ password: req.body.password })
@@ -55,10 +56,7 @@ router.post("/login", async (req, res) => {
 
         const token = res.send(successResponse({ response: "Login Succefull!", emailExists }));
       } else {
-        res.status(400).send(errorResponse({
-          status:400,
-          message:'please enter the upc email'
-        }))
+        res.status(400).send(errorResponse('please enter the upc email'))
       }
 
 

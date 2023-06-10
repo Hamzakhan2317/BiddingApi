@@ -8,14 +8,14 @@ const registerValidation = data => {
       minDomainSegments: 2,
       tlds: { allow: ["com", "net"] },
     }),
-    phoneNo:Joi.string().required()
+    phoneNo: Joi.string().required()
   });
 
-  const validate=schema.validate(data);
+  const validate = schema.validate(data);
   return validate;
 };
 const loginValidation = data => {
-  
+
   const schema = Joi.object({
     password: Joi.string(),
     edu: Joi.boolean(),
@@ -27,10 +27,10 @@ const loginValidation = data => {
 
   return schema.validate(data);
 };
-const productValidation = data =>{
+const productValidation = data => {
   const schema = Joi.object({
     userId: Joi.string(),
-    categoryType:Joi.string(),
+    categoryType: Joi.string(),
     productName: Joi.string(),
     productTitle: Joi.string(),
     productDescription: Joi.string(),
@@ -39,24 +39,34 @@ const productValidation = data =>{
   });
   return schema.validate(data);
 }
-const accountValidation = data =>{
+const accountValidation = data => {
   const schema = Joi.object({
     userId: Joi.string(),
-    balance:Joi.number(),
     name: Joi.string(),
   });
   return schema.validate(data);
 }
-const transactionValidation = data =>{
+const transactionValidation = data => {
   const schema = Joi.object({
     userId: Joi.string(),
-    desc:Joi.string(),
+    desc: Joi.string(),
     accountId: Joi.string(),
+    toAccountId: Joi.string().optional(),
     category: Joi.string(),
     transcationType: Joi.string(),
     amount: Joi.number(),
   });
+  return schema.validate(data); 
+}
+
+const driverValidation = data => {
+  const schema = Joi.object({
+    userId: Joi.string(),
+    departureLocation: Joi.string(),
+    vehicleType: Joi.string(),
+    noOfSeats: Joi.number(),
+  });
   return schema.validate(data);
 }
 
-module.exports = { registerValidation, loginValidation, productValidation, transactionValidation, accountValidation }
+module.exports = { registerValidation, loginValidation, productValidation, transactionValidation, accountValidation, driverValidation }
