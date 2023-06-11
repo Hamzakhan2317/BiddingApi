@@ -4,10 +4,7 @@ const registerValidation = data => {
   const schema = Joi.object({
     name: Joi.string().min(3).max(30).required(),
     password: Joi.string(),
-    email: Joi.string().email({
-      minDomainSegments: 2,
-      tlds: { allow: ["com", "net"] },
-    }),
+    email: Joi.string().email().regex(/^[a-zA-Z0-9._%+-]+@ucp\.edu\.pk$/).required(),
     phoneNo: Joi.string().required()
   });
 

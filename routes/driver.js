@@ -59,13 +59,25 @@ router.get("/driver", async (req, res) => {
 
 // getbyId
 router.post("/driverById", async (req, res) => {
-    console.log('first',req.params)
+    console.log('first', req.params)
+
+    let userFound = await User.find()
+
+
     await Driver.findById({ _id: req.body.id })
         .then((result) => {
-            res.send(successResponse(result));
+            let dataa = {
+                departureLocation: result?.departureLocation,
+                noOfSeats: result?.noOfSeats,
+                userId: result?.userId,
+                date: result?.date,
+                phoneNo: userFound.find(({ _id }) => _id == result.userId)?.phoneNo
+            }
+            res.send(successResponse(dataa));
         })
         .catch((error) => {
-            res.send(errorResponse(error));
+            console.log('err', error)
+            res.status(500).send(errorResponse(error));
         });
 });
 
