@@ -46,10 +46,25 @@ router.post("/driver", async (req, res) => {
     }
 });
 
-//get
 router.get("/driver", async (req, res) => {
+    const currentTime = new Date();  // Get the current time
+
+    // Subtract 30 minutes from the current time
+    const deletionTime = new Date(currentTime.getTime() - (30 * 60 * 1000));
+
     await Driver.find()
         .then((result) => {
+            const filteredResult = result.filter((post) => {
+                // Check if the post creation time is before the deletion time
+                const postCreationTime = new Date(post.date);
+                return postCreationTime < deletionTime;
+            });
+
+            // Delete the filtered posts
+            filteredResult.forEach(async (post) => {
+                await Driver.findByIdAndDelete(post._id);
+            });
+
             res.send(successResponse(result));
         })
         .catch((error) => {

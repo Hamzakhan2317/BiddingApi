@@ -61,8 +61,6 @@ router.post("/login", async (req, res) => {
 
 
     } else {
-
-
       const emailExists = await User.findOne({ email: req.body.email });
       if (!emailExists) return res.status(400).send(errorResponse(messages.loginFailedMessage))
       //check for password
