@@ -16,10 +16,7 @@ const loginValidation = data => {
   const schema = Joi.object({
     password: Joi.string(),
     edu: Joi.boolean(),
-    email: Joi.string().email({
-      minDomainSegments: 2,
-      tlds: { allow: ["com", "net"] },
-    }),
+    email: Joi.string().email(),
   });
 
   return schema.validate(data);
