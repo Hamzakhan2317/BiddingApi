@@ -47,7 +47,7 @@ router.post("/login", async (req, res) => {
       let ch = verifyEmail?.includes('ucp.edu.pk')
       if (ch) {
         const emailExists = await User.findOne({ email: req.body.email, password: req.body.password });
-        console.log('first',emailExists)
+        console.log('first', emailExists)
         if (!emailExists) return res.status(400).send(errorResponse(messages.loginFailedMessage))
         //check for password
         const validPassword = await User.findOne({ password: req.body.password })
@@ -75,6 +75,12 @@ router.post("/login", async (req, res) => {
     res.status(400).send(errorResponse(error.details[0].message))
   }
 
+});
+
+//get
+router.post("/user", async (req, res) => {
+  let userData = await User.find();
+  res.status(200).send(successResponse(userData));
 });
 
 router.post("/deleteUser", async (req, res) => {
