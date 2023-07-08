@@ -57,8 +57,10 @@ const driverValidation = data => {
   const schema = Joi.object({
     userId: Joi.string(),
     departureLocation: Joi.string(),
+    arrivalLocation: Joi.string(),
     vehicleType: Joi.string(),
     noOfSeats: Joi.number(),
+    licenseNo: Joi.number(),
   });
   return schema.validate(data);
 }

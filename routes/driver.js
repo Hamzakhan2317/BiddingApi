@@ -22,9 +22,11 @@ router.post("/driver", async (req, res) => {
         if (userFound) {
             const addDriverSchema = new Driver({
                 userId: req.body.userId,
+                licenseNo: req.body.licenseNo,
                 noOfSeats: req.body.noOfSeats,
                 vehicleType: req.body.vehicleType,
                 departureLocation: req.body.departureLocation,
+                arrivalLocation: req.body.departureLocation,
             });
             try {
                 const savedDriver = await addDriverSchema.save();
@@ -78,11 +80,12 @@ router.post("/driverById", async (req, res) => {
 
     let userFound = await User.find()
 
-
     await Driver.findById({ _id: req.body.id })
         .then((result) => {
             let dataa = {
                 departureLocation: result?.departureLocation,
+                arrivalLocation: result?.arrivalLocation,
+                licenseNo: result?.licenseNo,
                 noOfSeats: result?.noOfSeats,
                 userId: result?.userId,
                 date: result?.date,

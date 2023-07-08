@@ -77,6 +77,27 @@ router.post("/login", async (req, res) => {
 
 });
 
+// getbyId
+router.post("/userById", async (req, res) => {
+  console.log('first', req.params)
+
+  await User.findById({ _id: req.body.id })
+    .then((result) => {
+      let dataa = {
+        name: result?.name,
+        email: result?.email,
+        phoneNo: result?.phoneNo,
+        password: result?.password,
+        date: result?.date
+      }
+      res.send(successResponse(dataa));
+    })
+    .catch((error) => {
+      console.log('err', error)
+      res.status(500).send(errorResponse(error));
+    });
+});
+
 //get
 router.post("/user", async (req, res) => {
   let userData = await User.find();

@@ -6,11 +6,19 @@ const driverSchema = mongoose.Schema({
         type: String,
         require: true,
     },
+    arrivalLocation: {
+        type: String,
+        require: true,
+    },
     vehicleType: {
         type: String,
         require: true,
     },
     noOfSeats: {
+        type: Number,
+        require: true,
+    },
+    licenseNo: {
         type: Number,
         require: true,
     },
