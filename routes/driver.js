@@ -26,7 +26,7 @@ router.post("/driver", async (req, res) => {
                 noOfSeats: req.body.noOfSeats,
                 vehicleType: req.body.vehicleType,
                 departureLocation: req.body.departureLocation,
-                arrivalLocation: req.body.departureLocation,
+                arrivalLocation: req.body.arrivalLocation,
             });
             try {
                 const savedDriver = await addDriverSchema.save();
